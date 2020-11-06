@@ -10,7 +10,6 @@
 		"noImplicitAny": true,
 		"allowJs": true,
 		"noImplicitThis": true,
-		"noUnusedParameters": true,
 		"outDir": "./dist"
 	},
 	"include": ["src"]
