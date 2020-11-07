@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import Routers from './routers';
 import errorHandler from './middleware/error-handler';
 import ejs from 'ejs';
 import path from 'path';
+import api from './api';
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -17,11 +17,14 @@ app.engine('html', ejs.renderFile);
 
 // Middleware
 app.use(express.static('public'));
+app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/api', Routers.API);
-app.use('/', Routers.PAGES);
+app.use('/api', api);
+app.get('/help', (req, res) => res.render('help.html'));
+app.get('/about', (req, res) => res.render('about.html'));
+app.get('/', (req, res) => res.render('index.html'));
 
 app.use(errorHandler);
 
